@@ -1,1 +1,12 @@
-#add from hello-app
+kind: Service
+apiVersion: v1
+metadata:
+  name: welcome-demo
+spec:
+  selector:
+     run: welcome-demo
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
