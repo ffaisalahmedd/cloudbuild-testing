@@ -16,9 +16,7 @@ steps:
   args: ['set', 'image', 'deployment/projectname', 'projectname=eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA']
   waitFor: ['docker-build-push']
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west4-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=istio-1'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=poc-cluster'
 # Machine type - change this if you need more firepower
 # =================================================================
-options:
- machineType: 'N1_HIGHCPU_8'
