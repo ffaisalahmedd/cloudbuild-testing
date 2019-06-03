@@ -1,0 +1,24 @@
+steps:
+# Docker build
+# =================================================================
+- id: docker-build-push
+  name: gcr.io/cloud-builders/docker
+  entrypoint: bash
+  args:
+  - '-c'
+  - |
+    docker build -t "eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA" .
+    docker push "eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA"
+# Kubernetes
+# =================================================================
+- id: kubectl-set-image
+  name: gcr.io/cloud-builders/kubectl
+  args: ['set', 'image', 'deployment/projectname', 'projectname=eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA']
+  waitFor: ['docker-build-push']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west4-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=istio-1'
+# Machine type - change this if you need more firepower
+# =================================================================
+options:
+ machineType: 'N1_HIGHCPU_8'
