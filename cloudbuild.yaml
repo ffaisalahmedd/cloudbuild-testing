@@ -7,13 +7,13 @@ steps:
   args:
   - '-c'
   - |
-    docker build -t "eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA" .
-    docker push "eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA"
+    docker build -t "gcr.io/$PROJECT_ID/find-seller-app-dev-237005/github.com/ffaisalahmedd/welcome-demo:$SHORT_SHA" .
+    docker push "gcr.io/$PROJECT_ID/find-seller-app-dev-237005/github.com/ffaisalahmedd/welcome-demo:$SHORT_SHA"
 # Kubernetes
 # =================================================================
 - id: kubectl-set-image
   name: gcr.io/cloud-builders/kubectl
-  args: ['set', 'image', 'deployment/projectname', 'projectname=eu.gcr.io/$PROJECT_ID/projectname:$SHORT_SHA']
+  args: ['set', 'image', 'deployment/projectname', 'projectname=eu.gcr.io/$PROJECT_ID/find-seller-app-dev-237005/github.com/ffaisalahmedd/welcome-demo:$SHORT_SHA']
   waitFor: ['docker-build-push']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
