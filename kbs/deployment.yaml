@@ -1,27 +1,25 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: projectname
   labels:
-    app: projectname
+    run: welcome-demo
+  name: welcome-demo
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: projectname
+      run: welcome-demo
   template:
     metadata:
-      name: projectname
       labels:
-        app: projectname
+        run: welcome-demo
     spec:
       containers:
-        - name: projectname
-          image: eu.gcr.io/[PROJECT_ID]/projectname:[TAG]
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8888
+      - image: gcr.io/find-seller-app-dev-237005/github.com/ffaisalahmedd/welcome-demo
+        name: welcome-demo
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
