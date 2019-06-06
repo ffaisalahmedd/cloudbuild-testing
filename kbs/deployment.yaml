@@ -16,7 +16,7 @@ spec:
         run: welcome-demo
     spec:
       containers:
-      - image: gcr.io/find-seller-app-dev-237005/github.com/ffaisalahmedd/welcome-demo
+      - image: gcr.io/project-kubernetes-242705/welcome
         name: welcome-demo
         ports:
         - containerPort: 8080
